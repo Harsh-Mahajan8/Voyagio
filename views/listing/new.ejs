@@ -1,0 +1,77 @@
+<% layout('/layouts/boilerPLate.ejs') %>
+
+<div class="d-flex justify-content-between col-6 offset-3">
+  <h2 class="text-danger">Add New Listing</h2>
+    <a href="./listings" class="btn btn-danger col-1 align-center">
+      <i class="fa-solid fa-arrow-left " style="color: #ffffff"> </i>
+    </a>
+</div>
+
+<form action="/listings" method="post" class="col-6 offset-3 fs-5">
+  <div class="mb-2">
+    <label class="form-label" for="title">Title</label>
+    <input
+      class="form-control"
+      type="text"
+      name="title"
+      placeholder="Title"
+      required
+    />
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label" for="description">Description</label>
+    <textarea
+      class="form-control"
+      name="description"
+      id="description"
+      placeholder="Write your description"
+      required
+    >
+    </textarea>
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label" for="image[url]">Image</label>
+    <input
+      class="form-control"
+      type="text"
+      name="image[url]"
+      placeholder="Enter Image URL"
+    />
+  </div>
+  <div class="row">
+    <div class="mb-2 col-6">
+      <label class="form-label" for="price">Price</label>
+      <input
+        class="form-control"
+        type="number"
+        name="price"
+        placeholder="Price"
+        required
+      />
+    </div>
+    <div class="mb-2 col-6">
+      <label class="form-label" for="country">Country</label>
+      <input
+        class="form-control"
+        type="text"
+        name="country"
+        placeholder="Country"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label" for="location">Location</label>
+    <input
+      class="form-control"
+      type="text"
+      name="location"
+      placeholder="Location"
+      required
+    />
+  </div>
+  <button class="btn btn-danger my-3">Submit</button>
+</form>

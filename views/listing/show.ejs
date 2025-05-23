@@ -1,0 +1,41 @@
+<% layout('/layouts/boilerPLate.ejs') %>
+
+<div class="show offset-2 col-10">
+  <div class="row d-flex justify-content-between mb-3">
+    <div class="col-6">
+      <h2 class="text-danger">Listing Details:</h2>
+    </div>
+    <a href="/listings" class="col-4"> 
+      <button type="submit" class="btn btn-danger">
+        <i class="fa-solid fa-arrow-left" style="color: #ffffff"></i> 
+      </button>
+    </a>
+   
+  </div>
+
+  <div class="card col-6 offset-1">
+      <img src="<%= listing.image.url %>" class="card-img-top show-img col-6" alt= <%= listing.image.filename %> />      
+    <div class="card-body p-0 pt-2">
+      <h5 class="card-title"><%= listing.title %></h5>
+      <p class="card-text">
+        <%= listing.description %> <br />
+        &#8377; <%= listing.price.toLocaleString("en-IN") %>/night<br />
+        <%= listing.location %>, <%= listing.country %>
+      </p>
+      <div class="row">
+        <form action="/listing/<%= listing._id %>/edit" method="get" class="col-1 ">
+          <button class="btn btn-success mr-3">      
+            Edit
+          </button>
+        </form>
+        <form
+          action="/listing/<%= listing._id %>?method=DELETE"
+          method="post"
+          class="col-1 mx-5"
+        >
+          <button class="btn btn-dark">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
