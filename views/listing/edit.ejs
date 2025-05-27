@@ -1,8 +1,13 @@
 <% layout('/layouts/boilerPLate.ejs') %>
 
-<form action="/listing/<%= listing._id %>?method=PUT" method="post" class="col-6 offset-3 fs-5">
+<form
+  action="/listings/<%= listing._id %>?_method=PUT"
+  method="post"
+  class="col-6 offset-3 fs-5 needs-validation"
+  novalidate
+>
   <div class="d-flex justify-content-between mb-3">
-  <h2 class="text-danger">Edit Listing</h2>
+    <h2 class="text-danger">Edit Listing</h2>
     <button type="submit" class="btn btn-danger col-1">
       <a href="/listings">
         <i class="fa-solid fa-arrow-left" style="color: #ffffff"> </i>
@@ -12,28 +17,39 @@
 
   <div class="mb-3">
     <label class="form-label" for="title">Title</label>
-    <input class="form-control" type="text"
-    name="title"
-    placeholder="title"
-    value= "<%= listing.title %>" />
+    <input
+      class="form-control"
+      type="text"
+      name="title"
+      placeholder="title"
+      value="<%= listing.title %>"
+      required
+    />
+    <div class="valid-feedback">Title Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid Title</div>
   </div>
 
   <div class="mb-3">
     <label class="form-label" for="description">Description</label>
     <textarea
-    class="form-control"
-    name="description"
-    id="description"
-    placeholder="Write your description"><%= listing.description %></textarea>
+      class="form-control"
+      name="description"
+      id="description"
+      placeholder="Write your description" required
+    ><%= listing.description %></textarea
+    >
+    <div class="valid-feedback">Description Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid Description.
   </div>
 
-   <div class="mb-3">
+  <div class="mb-3">
     <label class="form-label" for="image[url]">Image</label>
     <input
-    class="form-control"
-    type="text"
-    name="image[url]"
-    value=<%= listing.image.url  %>
+      class="form-control"
+      type="text"
+      name="image[url]"
+      value= "<%=listing.image.url %>"
+      required
     />
   </div>
 
@@ -44,8 +60,11 @@
         class="form-control"
         type="number"
         name="price"
-        value=<%= listing.price  %>
+        value="<%= listing.price %>"
+        required
       />
+      <div class="valid-feedback">Price Looks good!</div>
+      <div class="invalid-feedback">Add a valid Price</div>
     </div>
     <div class="mb-3 col-6">
       <label class="form-label" for="country">Country</label>
@@ -53,9 +72,12 @@
         class="form-control"
         type="text"
         name="country"
-        value=<%= listing.country  %>
+        value= <%=listing.country %>
+        required
       />
-    </div>
+
+    <div class="valid-feedback">Country Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid Country.</div>
   </div>
 
   <div class="mb-3">
@@ -64,8 +86,12 @@
       class="form-control"
       type="text"
       name="location"
-      value=<%= listing.location  %>
+      value=<%=listing.location %>
+      required
     />
-  </div>
+  <div class="valid-feedback">Location Looks good!</div>
+  <div class="invalid-feedback">Please provide a valid Location.</div>
   <button class="btn btn-danger my-3">Edit</button>
+  </div>
+  
 </form>

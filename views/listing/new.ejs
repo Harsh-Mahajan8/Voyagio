@@ -2,12 +2,17 @@
 
 <div class="d-flex justify-content-between col-6 offset-3">
   <h2 class="text-danger">Add New Listing</h2>
-    <a href="./listings" class="btn btn-danger col-1 align-center">
-      <i class="fa-solid fa-arrow-left " style="color: #ffffff"> </i>
-    </a>
+  <a href="./listings" class="btn btn-danger col-1 align-center">
+    <i class="fa-solid fa-arrow-left" style="color: #ffffff"> </i>
+  </a>
 </div>
 
-<form action="/listings" method="post" class="col-6 offset-3 fs-5">
+<form
+  action="/listings"
+  method="post"
+  class="col-6 offset-3 fs-5 needs-validation"
+  novalidate
+>
   <div class="mb-2">
     <label class="form-label" for="title">Title</label>
     <input
@@ -17,6 +22,8 @@
       placeholder="Title"
       required
     />
+    <div class="valid-feedback">Title Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid Title</div>
   </div>
 
   <div class="mb-2">
@@ -27,8 +34,9 @@
       id="description"
       placeholder="Write your description"
       required
-    >
-    </textarea>
+    ></textarea>
+    <div class="valid-feedback">Description Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid Description.</div>
   </div>
 
   <div class="mb-2">
@@ -49,7 +57,10 @@
         name="price"
         placeholder="Price"
         required
+        
       />
+      <div class="valid-feedback">Price Looks good!</div>
+      <div class="invalid-feedback">Add a valid Price</div>
     </div>
     <div class="mb-2 col-6">
       <label class="form-label" for="country">Country</label>
@@ -60,7 +71,10 @@
         placeholder="Country"
         required
       />
+    <div class="valid-feedback">Country Looks good!</div>
+    <div class="invalid-feedback">Add a valid Country</div>
     </div>
+
   </div>
 
   <div class="mb-2">
@@ -72,6 +86,9 @@
       placeholder="Location"
       required
     />
+    <div class="valid-feedback">Location Looks good!</div>
+    <div class="invalid-feedback">Add a valid Location.</div>
   </div>
+
   <button class="btn btn-danger my-3">Submit</button>
 </form>
