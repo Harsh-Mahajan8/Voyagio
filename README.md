@@ -8,7 +8,7 @@
     <li><strong>Frontend:</strong> HTML, CSS, JavaScript, EJS</li>
     <li><strong>Backend:</strong> Node.js, Express</li>
     <li><strong>Database:</strong> MongoDB</li>
-    <li><strong>Authentication:</strong> Cookies, Sessions, Authorization, Session saved on cloud</li>
+    <li><strong>Authentication & Authorization:</strong> Cookies, Sessions</li>
     <li><strong>Mapping:</strong> Maps</li>
     <li><strong>Version Control:</strong> Git</li>
 </ul>
