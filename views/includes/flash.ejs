@@ -1,0 +1,36 @@
+<% if(save && save.length){ %>
+<div
+  class="save alert alert-success alert-dismissible fade show col-6 offset-3 mpy-1"
+  role="alert"
+>
+  <%= save[0] %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %> <% if(error && error.length){ %>
+<div
+  class="error alert alert-danger alert-dismissible fade show col-6 offset-3 mpy-1 "
+  role="alert"
+>
+  <%= error[0] %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %>
+
+<script>
+  setTimeout(function () {
+    var success = document.querySelector(".save");
+    if (success) success.style.display = "none";
+    var error = document.querySelector(".error");
+    if (error) error.style.display = "none";
+  }, 4000);
+</script>

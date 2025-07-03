@@ -1,0 +1,57 @@
+<% layout('/layouts/boilerPlate.ejs') %>
+<div class="row offset-md-4 ">
+  <div class="col-11 col-lg-6 border rounded-3 p-3 m-3">
+    <h2 class="text-danger pb-3 text-center">SignUp</h2>
+    <form action="/signup" method="post" class="needs-validation justify-content-center" novalidate>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          placeholder="name@example.com"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          placeholder="name"
+          required
+        />
+      </div>
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <label for="Password" class="col-form-label">Password</label>
+        </div>
+        <div class="col-auto">
+          <input
+            type="password"
+            id="Password"
+            name="password"
+            class="form-control mt-0 pt-0"
+            aria-describedby="passwordHelpInline"
+            required
+          />
+        </div>
+      </div>
+      <div class="d-flex justify-content-center mt-3">
+        <button class="btn btn-danger">
+          Sign Up
+        </button>
+      </div>
+      <hr />
+    </form>
+    <div class="row">
+      <div class="p col-4 offset-5 mb-2">or</div>
+      <div class="col-7 offset-3">  
+          <a href="/login" class="text-decoration-none text-black hover">Already have an Account</a>
+      </div>
+    </div>
+  </div>
+</div>

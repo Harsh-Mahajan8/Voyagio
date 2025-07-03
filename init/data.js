@@ -1,4 +1,10 @@
+const featureOptions = [
+  "Bedrooms", "City", "Swimming", "Beach", "Suset", "SnowFall",
+  "Surfing", "Villa", "Cottage", "Park", "Playground", "Rowing", "Houseboat"
+];
+
 const sampleListings = [
+  
   {
     title: "Cozy Beachfront Cottage",
     description:
@@ -348,5 +354,9 @@ const sampleListings = [
     country: "Costa Rica",
   },
 ];
-
+// Assign a random feature to each listing
+sampleListings.forEach(listing => {
+  const randomFeature = featureOptions[Math.floor(Math.random() * featureOptions.length)];
+  listing.feature = randomFeature;
+});
 module.exports = { data: sampleListings };

@@ -1,66 +1,178 @@
 <% layout('/layouts/boilerPLate.ejs') %>
-
-<div class="show offset-3 col-7">
-  <div class="row d-flex justify-content-between ms-3">
-    <div class="col-10">
+<script>
+  const name = <%- JSON.stringify(listing.title) %>;
+  const coordinates = <%- JSON.stringify(listing.coordinates) %>;
+</script>
+<div
+  class="show offset-lg-3 offset-md-2 offset-sm-1 col-lg-7 col-md-9 col-sm-10"
+>
+  <div class="row d-flex justify-content-between ms-3 pb-2">
+    <div class="col-md-10 col-8 fs-sm-5">
       <h4 class="card-title"><%= listing.title %></h4>
     </div>
-    <a href="/listings" class="col-2">
+    <a href="/listings" class="col-md-2 col-4">
       <button type="button" class="btn btn-danger">
         <i class="fa-solid fa-arrow-left" style="color: #ffffff"></i>
       </button>
     </a>
   </div>
 
-  <div class="card col-8 ms-4">
+  <div class="card col-md-9 ms-4 col-10">
     <img
       src="<%= listing.image.url %>"
-      class="card-img-top show-img col-6"
-      alt="<%= listing.image.filename %>"
+      class="card-img-top show-img col-md-6 col-10 mt-2"
+      alt=""
     />
+    <div class="card-img-overlay d-flex h-25">
+      <h5 class="card-title text-white">
+        Owned by <%= listing.owner && listing.owner.username %>
+      </h5>
+    </div>
     <div class="card-body p-0 pt-2">
-      <p class="card-text">
+      <p class="card-text ms-1">
         <%= listing.description %> <br />
         &#8377; <%= listing.price.toLocaleString("en-IN") %>/night<br />
         <%= listing.location %>, <%= listing.country %>
       </p>
+      <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
       <div class="row">
+        <div class="col-auto">
+          <form action="/listings/<%= listing._id %>/edit" method="get">
+            <button class="btn btn-danger mr-3">Edit</button>
+          </form>
+        </div>
+        <div class="col-auto">
+          <form
+            action="/listings/<%= listing._id %>?_method=DELETE"
+            method="post"
+          >
+            <button class="btn btn-dark">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% } %>
+    </div>
+
+    <hr />
+    <h4>Where you'll be</h4>
+    <div id="map"></div>
+  </div>
+  <hr />
+  <div class="review col-8 ms-5">
+    <h4>Leave a Review</h4>
+    <form
+      action="/listings/<%= listing._id %>/review"
+      method="post"
+      class="ms-3 needs-validation"
+      novalidate
+    >
+      <div class="rating mb-2 mt-3 d-flex fs-5">
+        <label for="rating" class="form-label me-2">Rating</label>
+        <fieldset class="starability-slot ms-md-5 col-4 ms-2 h-25">
+          <input type="radio" id="rate1" name="review[rating]" value="1" />
+          <label for="rate1">1 star.</label>
+
+          <input type="radio" id="rate2" name="review[rating]" value="2" />
+          <label for="rate2">2 stars.</label>
+
+          <input type="radio" id="rate3" name="review[rating]" value="3" />
+          <label for="rate3">3 stars.</label>
+
+          <input type="radio" id="rate4" name="review[rating]" value="4" />
+          <label for="rate4">4 stars.</label>
+
+          <input type="radio" id="rate5" name="review[rating]" value="5" />
+          <label for="rate5">5 stars.</label>
+
+          <span class="starability-focus-ring"></span>
+        </fieldset>
+      </div>
+      <div class="comment mb-3">
+        <label for="comment" class="form-label fs-5">Comment</label>
+        <textarea
+          class="form-control"
+          name="review[comment]"
+          id="comment"
+          cols="25"
+          rows="5"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please provide a valid comment.</div>
+      </div>
+      <button class="btn btn-outline-danger mb-2">Submit</button>
+    </form>
+  </div>
+
+  <% if(listing.reviews.length > 0){ %>
+  <hr />
+  <p class="ms-3"><b>Reviews</b></p>
+  <div class="d-flex flex-wrap">
+    <% for(review of listing.reviews){ %>
+    <div class="card col-md-6 col-12 d-flex mb-md-5 mt-1 pe-4 ps-2 mb-3">
+      <div class="card-header py-0 d-flex">
+        <div class="left flex-grow-1">
+          <div class="card-title m-0 pb-1 fs-5"><%= review.name %></div>
+          <p class="m-0 p-0 dateSize">
+            <%= new Date(review.createdAt).toLocaleDateString() %>
+          </p>
+        </div>
+        <div class="right">
+          <div class="ms-2"><%= review.rating %> star</div>
+          <p
+            class="starability-result fs-5 mb-1 ms-sm-3"
+            data-rating="<%= review.rating %>"
+          ></p>
+        </div>
+      </div>
+      <div class="card-body py-1 d-flex mt-0 pt-1">
+        <div class="card-text flex-grow-1">
+          <div class="card">
+            <!-- Short comment section (shown by default) -->
+            <div class="collapse show" id="collapseBody<%= review._id %>">
+              <div class="card-body pt-1 ps-1">
+                <%= review.comment ? review.comment.slice(0, 50) : "" %> <% if
+                (review.comment && review.comment.length > 50) { %> ...
+                <a
+                  class="btn btn-link p-0"
+                  data-bs-toggle="collapse"
+                  href="#collapseComment<%= review._id %>,#collapseBody<%= review._id %>"
+                  aria-expanded="false"
+                  aria-controls="collapseComment<%= review._id %> collapseBody<%= review._id %>"
+                >
+                  Show more
+                </a>
+                <% } %>
+              </div>
+            </div>
+            <!-- Full comment section (hidden by default) -->
+            <div class="collapse" id="collapseComment<%= review._id %>">
+              <div class="card-body pt-1 ps-1">
+                <%= review.comment %>
+                <a
+                  class="btn btn-link p-0"
+                  data-bs-toggle="collapse"
+                  href="#collapseComment<%= review._id %>,#collapseBody<%= review._id %>"
+                  aria-expanded="false"
+                  aria-controls="collapseComment<%= review._id %> collapseBody<%= review._id %>"
+                >
+                  Back
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
         <form
-          action="/listings/<%= listing._id %>/edit"
-          method="get"
-          class="col-1"
-        >
-          <button class="btn btn-danger mr-3">Edit</button>
-        </form>
-        <form
-          action="/listings/<%= listing._id %>?_method=DELETE"
+          action="/listings/<%= listing._id %>/review/<%= review._id %>?_method=DELETE"
           method="post"
-          class="col-1 mx-5"
+          class="align-self-end"
         >
-          <button class="btn btn-dark">Delete</button>
+          <button class="btn btn-outline-danger">
+            <i class="fa-solid fa-trash"></i>
+          </button>
         </form>
       </div>
     </div>
+    <% } %>
   </div>
-  <hr />
-
-  <div class="review col-8 offset-1">
-    <h4>Leave a Review</h4>
-    <form action="/listings/<%= listing._id %>/review" method="post" class="ms-3 needs-validation" novalidate>
-      <div class="rating mb-2 mt-3">
-        <label for="rating" class="form-label">Rating</label>
-        <input type="range" class="form-range"  name="review[rating]" id="rating" min="1" max="5" />
-      </div>
-      <div class="comment mb-3 ">
-        <label for="comment" class="form-label">Comment</label>
-        <textarea class="form-control" name="review[comment]" id="comment" cols="15" rows="3" required></textarea>
-          <div class="invalid-feedback">
-            Please provide a valid comment.
-          </div>
-        </div>
-        <button class="btn btn-outline-danger mb-5  " >
-          Submit
-        </button>
-    </form>
-  </div>
+  <% } %>
 </div>

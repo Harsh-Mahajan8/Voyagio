@@ -1,98 +1,107 @@
 <% layout('/layouts/boilerPLate.ejs') %>
 
-<form
-  action="/listings/<%= listing._id %>?_method=PUT"
-  method="post"
-  class="col-6 offset-3 fs-5 needs-validation"
-  novalidate
->
-  <div class="d-flex justify-content-between mb-3">
-    <h2 class="text-danger">Edit Listing</h2>
-    <button type="submit" class="btn btn-danger col-1">
-      <a href="/listings">
+<div class="row ms-4">
+  <div class="newpage col-10 col-md-7 col-lg-6 offset-md-3 mt-0 offset-lg-3">
+    <div class="d-flex justify-content-between">
+      <h2 class="text-danger">Edit Listing</h2>
+      <a href="/listings" class="back btn btn-danger align-self-center">
         <i class="fa-solid fa-arrow-left" style="color: #ffffff"> </i>
       </a>
-    </button>
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label" for="title">Title</label>
-    <input
-      class="form-control"
-      type="text"
-      name="title"
-      placeholder="title"
-      value="<%= listing.title %>"
-      required
-    />
-    <div class="valid-feedback">Title Looks good!</div>
-    <div class="invalid-feedback">Please provide a valid Title</div>
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label" for="description">Description</label>
-    <textarea
-      class="form-control"
-      name="description"
-      id="description"
-      placeholder="Write your description" required
-    ><%= listing.description %></textarea
-    >
-    <div class="valid-feedback">Description Looks good!</div>
-    <div class="invalid-feedback">Please provide a valid Description.
-  </div>
-  </div>
-
-  <div class="mb-3">
-    <label class="form-label" for="image[url]">Image</label>
-    <input
-      class="form-control"
-      type="text"
-      name="image[url]"
-      value= "<%=listing.image.url %>"
-      required
-    />
-  </div>
-
-  <div class="row">
-    <div class="mb-3 col-6">
-      <label class="form-label" for="price">Price</label>
-      <input
-        class="form-control"
-        type="number"
-        name="price"
-        value="<%= listing.price %>"
-        required
-      />
-      <div class="valid-feedback">Price Looks good!</div>
-      <div class="invalid-feedback">Add a valid Price</div>
     </div>
-    <div class="mb-3 col-6">
-      <label class="form-label" for="country">Country</label>
-      <input
-        class="form-control"
-        type="text"
-        name="country"
-        value= <%=listing.country %>
-        required
-      />
+    <form
+      action="/listings/<%= listing._id %>?_method=PUT"
+      method="POST"
+      class="fs-5 needs-validation col-lg-11 col-auto ms-lg-4 ms-2 mt-2"
+      novalidate
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+          class="form-control"
+          type="text"
+          name="listing[title]"
+          placeholder="title"
+          value="<%= listing.title %>"
+          required
+        />
+        <div class="valid-feedback">Title Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid Title</div>
+      </div>
 
-    <div class="valid-feedback">Country Looks good!</div>
-    <div class="invalid-feedback">Please provide a valid Country.</div>
-  </div>
-  </div>
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+          class="form-control"
+          name="listing[description]"
+          id="description"
+          placeholder="Write your description"
+          required
+        >
+<%= listing.description %></textarea
+        >
+        <div class="valid-feedback">Description Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid Description.</div>
+      </div>
+      <div class="img d-flex row">
+        <div class="mb-3">
+          <label class="form-label" for="image[url]">Image</label>
+          <input
+            class="form-control"
+            type="file"
+            name="listing[image]"
+            value="<%= listing.image.filename %>"
+    
+          />
+        </div>
+        <img
+          src="<%= originalUrl %>"
+          alt=""
+          srcset=""
+          class="col-8 p-2 ms-2 h-25"
+        />
+      </div>
 
-  <div class="mb-3">
-    <label class="form-label" for="location">Location</label>
-    <input
-      class="form-control"
-      type="text"
-      name="location"
-      value=<%=listing.location %>
-      required
-    />
-  <div class="valid-feedback">Location Looks good!</div>
-  <div class="invalid-feedback">Please provide a valid Location.</div>
-  <button class="btn btn-danger my-3">Edit</button>
+      <div class="row">
+        <div class="mb-3 col-6">
+          <label class="form-label" for="price">Price</label>
+          <input
+            class="form-control"
+            type="number"
+            name="listing[price]"
+            value="<%= listing.price %>"
+            required
+          />
+          <div class="valid-feedback">Price Looks good!</div>
+          <div class="invalid-feedback">Add a valid Price</div>
+        </div>
+        <div class="mb-3 col-6">
+          <label class="form-label" for="country">Country</label>
+          <input
+            class="form-control"
+            type="text"
+            name="listing[country]"
+            value="<%= listing.country %>"
+            required
+          />
+          <div class="valid-feedback">Country Looks good!</div>
+          <div class="invalid-feedback">Please provide a valid Country.</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          name="listing[location]"
+          value="<%= listing.location %>"
+          required
+        />
+        <div class="valid-feedback">Location Looks good!</div>
+        <div class="invalid-feedback">Please provide a valid Location.</div>
+      </div>
+
+      <button type="submit" class="btn btn-danger my-3">Edit</button>
+    </form>
   </div>
-</form>
+</div>

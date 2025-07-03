@@ -1,0 +1,32 @@
+<% layout('/layouts/boilerPLate.ejs') %>
+
+<div class="row justify-content-center mt-4 ">
+
+  <div class="d-flex justify-content-between mx-5">
+    <h2 class="text-danger"><%= query %></h2>
+    <a href="/listings" class="back btn btn-danger align-self-center">
+      <i class="fa-solid fa-arrow-left " style="color: #ffffff"> </i>
+    </a>
+  </div>
+  <% listings.forEach(listing => { %>
+  <div class="card col-3 mb-3 p-0 hover m-3 mx-3" style="width: 20rem">
+    <a href="/listings/<%= listing._id %>" class="text-decoration-none">
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top card-img"
+        alt="<%= listing.image.filename %>"
+      />
+      <div class="card-body text-black p-0 pt-2 mx-1">
+        <h5 class="card-title"><%= listing.title %></h5>
+        <p class="card-text m-0 p-0 text-secondary">
+          ₹<%= listing.price.toLocaleString("en-IN") %> for night
+          <span class="tax text-black"> + ₹500 </span>
+        </p>
+      </div>
+    </a>
+  </div>
+  <% }) %>
+  <% if(listings.length==0){ %>
+    <h3 class="ms-5 ps-5">No Listing</h3>
+    <% } %>
+</div>
