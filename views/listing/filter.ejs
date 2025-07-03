@@ -1,11 +1,10 @@
-<% layout('/layouts/boilerPLate.ejs') %>
+<% layout('/layouts/boilerPlate.ejs') %>
 
-<div class="row justify-content-center mt-4 ">
-
+<div class="row justify-content-center mt-4">
   <div class="d-flex justify-content-between mx-5">
     <h2 class="text-danger"><%= query %></h2>
     <a href="/listings" class="back btn btn-danger align-self-center">
-      <i class="fa-solid fa-arrow-left " style="color: #ffffff"> </i>
+      <i class="fa-solid fa-arrow-left" style="color: #ffffff"> </i>
     </a>
   </div>
   <% listings.forEach(listing => { %>
@@ -25,8 +24,7 @@
       </div>
     </a>
   </div>
-  <% }) %>
-  <% if(listings.length==0){ %>
-    <h3 class="ms-5 ps-5">No Listing</h3>
-    <% } %>
+  <% }) %> <% if(listings.length==0){ %>
+  <h3 class="ms-5 ps-5">No Listing</h3>
+  <% } %>
 </div>
