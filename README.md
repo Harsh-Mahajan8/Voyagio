@@ -14,7 +14,7 @@
 </ul>
 
 <h2>Deployment</h2>
-<p>This project is deployed on Render and can be accessed at <a href="https://voyagio-e1bv.onrender.com/">https://voyagio-e1bv.onrender.com/</a>.</p>
+<p>This project is deployed on Render and can be accessed at <a href="https://voyagio-e1bv.onrender.com/listings">https://voyagio-e1bv.onrender.com/listings</a>.</p>
 
 <h2>Repository</h2>
 <p>The source code for Voyagio is hosted on GitHub at <a href="https://github.com/Harsh-Mahajan8/Voyagio.git">https://github.com/Harsh-Mahajan8/Voyagio.git</a>.</p>
