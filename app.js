@@ -47,12 +47,12 @@ const store = MongoStore.create({
     crypto: {
         secret: process.env.SECRET
     },
-    touchAfter: 24* 3600
+    touchAfter: 24 * 3600
 })
 
 const sessionOpt = {
     store,
-    secret:process.env.SECRET,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -76,11 +76,10 @@ app.listen(8080, () => {
 });
 
 
-
 app.use((req, res, next) => {
     res.locals.save = req.flash("save");
     res.locals.error = req.flash("error");
-    res.locals.username = req.session.username;
+    res.locals.username = req.session.username||null;
     res.locals.currUser = req.user;
     next();
 });
